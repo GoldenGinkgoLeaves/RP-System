@@ -49,6 +49,8 @@ public class CustomerInfoDao extends UserInfoDao {
                 customer.setPath(resultSet.getString("path"));
                 customer.setBalance(resultSet.getDouble("balance"));
                 customer.setPayPassword(resultSet.getString("payPassword"));
+                customer.setCompletedOrders(new OrderDao().getCustomerCompletedOrders());
+                customer.setMyDocuments(new DocumentDao().getCustomerAllDocument());
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -66,7 +68,6 @@ public class CustomerInfoDao extends UserInfoDao {
     private double balance;
     private String path;
     private List<Document> myDocuments;
-    private List<Store> oftenUsedStores;
     private Store defaultStore;
     private String payPassword;
 }

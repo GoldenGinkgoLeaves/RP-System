@@ -2,6 +2,7 @@ package dao;
 
 import pojo.Customer;
 import pojo.Document;
+import service.UserManager;
 import util.DatabaseHelper;
 
 import java.sql.ResultSet;
@@ -21,8 +22,8 @@ public class DocumentDao {
     /**
      * 获得某用户的所有文件列表
      */
-    public List<Document> getCustomerAllDocument(int customerId) {
-        return findDocumentsByForeignKey(customerId);
+    public List<Document> getCustomerAllDocument() {
+        return findDocumentsByForeignKey(UserManager.getCurrentUser().getId());
     }
 
     /**

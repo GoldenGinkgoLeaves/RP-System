@@ -4,7 +4,6 @@ import pojo.Customer;
 import pojo.Document;
 import pojo.Order;
 import pojo.Store;
-import service.OrderManager;
 import service.UserManager;
 import util.DatabaseHelper;
 
@@ -14,11 +13,33 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class OrderDao {
+
+    public List<Order> getCustomerAllOrders() {
+        String sql = "select * from `order` where customer_id=" + UserManager.getCurrentUser().getId();
+        return getUserOrders(sql);
+    }
+
+    public List<Order> getStoreAllOrders() {
+        String sql = "select * from `order` where store_id=" + UserManager.getCurrentUser().getId();
+        return getUserOrders(sql);
+    }
+
+    public List<Order> getCustomerCompletedOrders() {
+        String sql = "select * from `order` where customer_id=" + UserManager.getCurrentUser().getId()
+                + "and is_picked_up=1";
+        return getUserOrders(sql);
+    }
+
+    public List<Order> getStoreCompletedOrders() {
+        String sql = "select * from `order` where store_id=" + UserManager.getCurrentUser().getId()
+                + "and is_picked_up=1";
+        return getUserOrders(sql);
+    }
+
     /**
      * 获取当前用户的所有账单
      */
-    public List<Order> getUserAllOrders() {
-        String sql = "select * from `order` where customer_id=" + UserManager.getCurrentUser().getId();
+    private List<Order> getUserOrders(String sql) {
         ResultSet resultSet = DatabaseHelper.executeQuery(sql);
         List<Order> orders = new ArrayList<>();
         try {
