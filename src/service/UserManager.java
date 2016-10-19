@@ -46,14 +46,12 @@ public class UserManager {
             if (confirmAccountType(account) == TYPE_CUSTOMER) {
                 if (isPasswordCorrect(TYPE_CUSTOMER, account, password)) {
                     Customer customer = new CustomerInfoDao().getCustomerInfoByAccount(account);
-                    currentUser = customer;
-                    userType = TYPE_CUSTOMER;
+                    setCurrentUser(customer, TYPE_CUSTOMER);
                 } else return false;
             } else if (confirmAccountType(account) == TYPE_STORE) {
                 if (isPasswordCorrect(TYPE_STORE, account, password)) {
                     Store store = new StoreInfoDao().getStoreInfoByAccount(account);
-                    currentUser = store;
-                    userType = TYPE_STORE;
+                    setCurrentUser(store, TYPE_STORE);
                 } else return false;
             }
             return true;

@@ -9,13 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class StoreInfoDao extends UserInfoDao {
-    private String name;
-    private double priceBlack;//纯黑价格
-    private double priceColor;//彩印价格
-    private Store.BusinessHours businessHours;//营业时间
-    private String address;//地址
-    private double profit;//盈利
-    private List<Order> ongoingOrders;//正在进行的订单
 
     public StoreInfoDao() {
         super();
@@ -29,21 +22,27 @@ public class StoreInfoDao extends UserInfoDao {
         return storeList;
     }
 
+    //设置营业时间
     public void setBusinessHours(LocalTime begin, LocalTime end) {
     }
 
+    //设置黑色打印价格
     public void setPriceBlack(double priceBlack) {
     }
 
+    //设置彩印价格
     public void setPriceColor(double priceColor) {
     }
 
+    //设置地址
     public void setAddress(String address) {
     }
 
+    //修改盈利
     public void setProfit(double profit) {
     }
 
+    //设置店名
     public void setName(String name) {
     }
 
@@ -66,13 +65,6 @@ public class StoreInfoDao extends UserInfoDao {
      */
     public Store getStoreInfoById(int storeId) {
         return new Store();
-    }
-
-    /**
-     * 获得当前登录的店家的信息
-     */
-    public Store getLoginStoreInfo() {
-        return getStoreInfoById(UserManager.getCurrentUser().getId());
     }
 
     public Store getStoreInfoByAccount(String account) {

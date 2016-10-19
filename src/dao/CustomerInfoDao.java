@@ -50,13 +50,6 @@ public class CustomerInfoDao extends UserInfoDao {
         return new Customer();
     }
 
-    /**
-     * 这是查询当前登录用户的信息的方法
-     */
-    public Customer getLoginCustomerInfo() {
-        return getCustomerInfoById(UserManager.getCurrentUser().getId());
-    }
-
     public void setBalance(double balance) {
     }
 

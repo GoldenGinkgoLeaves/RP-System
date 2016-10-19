@@ -1,7 +1,5 @@
 package pojo;
 
-import enumeration.PrintType;
-
 import java.util.List;
 
 public class Order implements Comparable<Order> {
@@ -24,12 +22,13 @@ public class Order implements Comparable<Order> {
     //在这个类中删除了打印类型
     private List<Document> documents;
 
+    //构造方法，必须需要消费者，商店和文件列表
     public Order(Customer customer, Store store, List<Document> documents) {
         this.customer = customer;
         this.store = store;
         this.documents = documents;
         for (Document document : documents) {
-            if (document.getPrintType() == PrintType.black) {
+            if (document.getPrintType() == Document.PRINT_BLACK) {
                 price += document.getPages() * document.getNumberOfCopies() * store.getPriceBlack();
             } else {
                 price += document.getPages() * document.getNumberOfCopies() * store.getPriceColor();

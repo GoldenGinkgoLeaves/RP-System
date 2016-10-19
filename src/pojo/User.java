@@ -6,6 +6,7 @@ import java.util.List;
  * 所有两类用户的父类，存储与处理用户的基本信息
  */
 public abstract class User {
+    private int type;//用于在针对父类的Dao方法中确定用户类型
     private int id;
     private String account;
     private String password;
@@ -68,5 +69,13 @@ public abstract class User {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
     }
 }

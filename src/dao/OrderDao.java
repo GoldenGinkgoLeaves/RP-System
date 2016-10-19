@@ -16,7 +16,7 @@ public class OrderDao {
 
     public void addNewOrder(Order order) {
         //TODO 在数据库里添加一条订单
-        String sql = "";
+        String sql = "insert into `order`(customer_id,store_id,code,price,evaluation,is_picked_up ";
         DatabaseHelper.executeUpdate(sql);
     }
 

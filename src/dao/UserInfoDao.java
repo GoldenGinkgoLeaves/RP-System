@@ -15,6 +15,7 @@ import java.util.List;
 abstract class UserInfoDao {
     private User user;
 
+    //在构造这个Dao的时候就已经确定操作的是当前登录用户，当然也包含不针对此用户的操作
     UserInfoDao() {
         user = UserManager.getCurrentUser();
     }
@@ -34,8 +35,14 @@ abstract class UserInfoDao {
     public void setTelephone(String telephone) {
     }
 
+    /**
+     * @return 获得用户已完成订单列表
+     */
     public List<Order> getCompletedOrders() {
-        List<Order> completedOrders = new ArrayList<>();
-        return completedOrders;
+        if (user.getType() == UserManager.TYPE_CUSTOMER) {
+            return new OrderDao().getCustomerCompletedOrders();
+        } else {
+            return new OrderDao().getStoreCompletedOrders();
+        }
     }
 }
