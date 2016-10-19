@@ -4,38 +4,23 @@ import pojo.Customer;
 import pojo.Document;
 import pojo.Order;
 import pojo.Store;
+import service.UserManager;
 import util.DatabaseHelper;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class CustomerInfoDao extends UserInfoDao {
-
-    public CustomerInfoDao(Customer customer) {
-        super(customer);
-    }
 
     public CustomerInfoDao() {
         super();
     }
 
-//    public List<Customer> getAllCustomersInfo() {
-//        List<Customer> customerList = new ArrayList<>();
-//        return customerList;
-//    }
-
-    public void setBalance(double balance) {
-    }
-
-    public void setPath(String path) {
-    }
-
-    public void setDefaultStore(Store defaultStore) {
-    }
-
-    public Customer getCustomerInfo(int customerId) {
+    /**
+     * 这是通过id查找消费者信息的方法，可用于查询不通消费者
+     */
+    public Customer getCustomerInfoById(int customerId) {
         String sql = "select * from customer where id=" + customerId;
         Customer customer = new Customer();
         ResultSet resultSet = DatabaseHelper.executeQuery(sql);
@@ -55,19 +40,34 @@ public class CustomerInfoDao extends UserInfoDao {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return customer;
+    }
+
+    /**
+     * 用于在登录时根据账号获得消费者信息
+     */
+    public Customer getCustomerInfoByAccount(String account) {
         return new Customer();
     }
 
-    private int id;
-    private String account;
-    private String password;
-    private String introduction;
-    private String email;
-    private String telephone;
-    private List<Order> completedOrders;
-    private double balance;
-    private String path;
-    private List<Document> myDocuments;
-    private Store defaultStore;
-    private String payPassword;
+    /**
+     * 这是查询当前登录用户的信息的方法
+     */
+    public Customer getLoginCustomerInfo() {
+        return getCustomerInfoById(UserManager.getCurrentUser().getId());
+    }
+
+    public void setBalance(double balance) {
+    }
+
+    public void setPath(String path) {
+    }
+
+    public void setDefaultStore(Store defaultStore) {
+    }
+
+    public void setPayPassword(double payPassword) {
+
+    }
+
 }

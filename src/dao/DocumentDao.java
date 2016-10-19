@@ -26,31 +26,16 @@ public class DocumentDao {
         return findDocumentsByForeignKey(UserManager.getCurrentUser().getId());
     }
 
-    /**
-     * 在文件表中根据外键选出部分文件
-     */
-    private List<Document> findDocumentsByForeignKey(int foreignKey) {
-        String sql = "select * from document where order_id=" + foreignKey;
-        List<Document> documents = new ArrayList<>();
-        ResultSet resultSet = DatabaseHelper.executeQuery(sql);
-        try {
-            if (resultSet != null) {
-                while (resultSet.next()) {
-                    Document document = new Document();
-                    document.setId(resultSet.getInt("id"));
-                    document.setName(resultSet.getString("name"));
-                    document.setFormat(resultSet.getInt("format"));
-                    document.setPages(resultSet.getInt("pages"));
-                    document.setPath(resultSet.getString("path"));
-                    Customer customer = new CustomerInfoDao().getCustomerInfo(resultSet.getInt("customer"));
-                    document.setCustomer(customer);
-                    documents.add(document);
-                }
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return documents;
+    public void addNewDocument(Document document) {
+        //TODO 添加文件的sql语句
+        String sql = "";
+        DatabaseHelper.executeUpdate(sql);
+    }
+
+    public void deleteDocument(Document document) {
+        //TODO 删除文件的sql语句
+        String sql = "";
+        DatabaseHelper.executeUpdate(sql);
     }
 
     /**
@@ -67,12 +52,39 @@ public class DocumentDao {
                 document.setFormat(resultSet.getInt("format"));
                 document.setPages(resultSet.getInt("pages"));
                 document.setPath(resultSet.getString("path"));
-                Customer customer = new CustomerInfoDao().getCustomerInfo(resultSet.getInt("customer"));
+                Customer customer = new CustomerInfoDao().getCustomerInfoById(resultSet.getInt("customer"));
                 document.setCustomer(customer);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return document;
+    }
+
+    /**
+     * 在文件表中根据外键选出部分文件
+     */
+    private List<Document> findDocumentsByForeignKey(int foreignKey) {
+        String sql = "select * from document where order_id=" + foreignKey;
+        List<Document> documents = new ArrayList<>();
+        ResultSet resultSet = DatabaseHelper.executeQuery(sql);
+        try {
+            if (resultSet != null) {
+                while (resultSet.next()) {
+                    Document document = new Document();
+                    document.setId(resultSet.getInt("id"));
+                    document.setName(resultSet.getString("name"));
+                    document.setFormat(resultSet.getInt("format"));
+                    document.setPages(resultSet.getInt("pages"));
+                    document.setPath(resultSet.getString("path"));
+                    Customer customer = new CustomerInfoDao().getCustomerInfoById(resultSet.getInt("customer"));
+                    document.setCustomer(customer);
+                    documents.add(document);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return documents;
     }
 }

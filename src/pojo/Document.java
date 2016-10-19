@@ -1,9 +1,7 @@
 package pojo;
 
-import enumeration.PrintType;
-
 public class Document {
-    private static final int UNKNOW = 0;
+    private static final int UNKNOWN = 0;
     private static final int DOC = 1;
     private static final int DOCX = 2;
     private static final int XLS = 3;
@@ -11,9 +9,12 @@ public class Document {
     private static final int PPT = 5;
     private static final int PPTX = 6;
 
+    public static final int PRINT_BLACK = 1;
+    public static final int PRINT_COLOR = 2;
+
     private int id;
     private String name;
-    private int format = UNKNOW;
+    private int format = UNKNOWN;
     private int pages;
     private Customer customer;
     private String path;
@@ -23,7 +24,7 @@ public class Document {
      * 默认为黑白和0份，选中打印改此属性为1份或多份，无需存入数据库
      * 这样订单中只需要有一个文件列表即可
      */
-    private PrintType printType = PrintType.black;
+    private int printType = PRINT_BLACK;
     private int numberOfCopies = 0;
 
     public String getName() {
@@ -71,11 +72,11 @@ public class Document {
         return id;
     }
 
-    public PrintType getPrintType() {
+    public int getPrintType() {
         return printType;
     }
 
-    public void setPrintType(PrintType printType) {
+    public void setPrintType(int printType) {
         this.printType = printType;
     }
 
