@@ -7,7 +7,7 @@ import java.sql.*;
 public class DatabaseHelper {
 
     //根据数据库连接协议定义连接URL
-    private static final String URL = "jdbc:mysql://localhost:3306/javaee?"
+    private static final String URL = "jdbc:mysql://120.27.105.171:3306/self_print?"
             + "user=root&password=password&useUnicode=true&characterEncoding=UTF8";
 
     //在使用java代码访问数据库前，需要将目标数据库的JDBC驱动载入
@@ -28,7 +28,7 @@ public class DatabaseHelper {
      *
      * @param sql 要执行的sql语句
      */
-    public static void excuteUpdate(String sql) {
+    public static void executeUpdate(String sql) {
         Connection connection = null;
         try {
             connection = DriverManager.getConnection(URL);
@@ -52,9 +52,11 @@ public class DatabaseHelper {
         try {
             connection = DriverManager.getConnection(URL);
             Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery(sql);
-            CachedRowSet cachedRowSet = new CachedRowSet();
-            cachedRowSet.populate(resultSet);
+            CachedRowSet cachedRowSet;
+            try (ResultSet resultSet = statement.executeQuery(sql)) {
+                cachedRowSet = new CachedRowSet();
+                cachedRowSet.populate(resultSet);
+            }
             return cachedRowSet;
         } catch (SQLException e) {
             e.printStackTrace();

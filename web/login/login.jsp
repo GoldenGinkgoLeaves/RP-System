@@ -13,7 +13,7 @@
     <title>登陆</title>
 </head>
 <frameset rows="29%,71%" border="0px">
-    <frame src="login-head.html" name="head">
-    <frame src="customer-login.html" name="main">
+    <frame src="login-head.jsp" name="head">
+    <frame src="customer-login.jsp" name="main">
 </frameset>
 </html>

@@ -13,7 +13,7 @@
     <title>注册</title>
 </head>
 <frameset rows="26%,74%" border="0px">
-    <frame src="head.html" name="head">
-    <frame src="customer-regist.html" name="main">
+    <frame src="head.jsp" name="head">
+    <frame src="customer-regist.jsp" name="main">
 </frameset>
 </html>

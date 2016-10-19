@@ -88,8 +88,8 @@
     <p>远程打印系统</p>
     <div class="img"></div>
 </div>
-<a class="custom" href="customer-login.html" target="main">用户登陆</a>
-<a class="store" href="store-login.html" target="main">商家登陆</a>
+<a class="custom" href="customer-login.jsp" target="main">用户登陆</a>
+<a class="store" href="store-login.jsp" target="main">商家登陆</a>
 <hr>
 </body>
 </html>

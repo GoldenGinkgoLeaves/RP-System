@@ -34,10 +34,10 @@
             background-image: url("/images/index.jpg");
             background-repeat: no-repeat;
             border-radius: 8px;
-            margin-top: 8px;
+            margin-top: 5px;
         }
         #content{
-            margin-top: 8px;
+            margin-top: 5px;
             border-radius: 8px;
             float: left;
             width: 25.7%;
@@ -52,6 +52,7 @@
             display: block;
             width: 60%;
             height: 60px;
+            margin-left: 80px;
         }
         #content #one a{
             background-color: red;
@@ -81,8 +82,8 @@
 <div id="top">欢迎来到远程打印系统</div>
 <div id="logo"></div>
 <div id="content">
-    <p id="one"><a href="login.html">登陆</a></p>
-    <p><a href="regist.html">注册</a></p>
+    <p id="one"><a href="login/login.jsp">登陆</a></p>
+    <p><a href="regist/regist.jsp">注册</a></p>
 </div>
 </body>
 </html>

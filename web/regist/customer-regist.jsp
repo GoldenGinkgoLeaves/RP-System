@@ -14,7 +14,7 @@
     <link rel="stylesheet" type="text/css" href="../css/customer-regist.css">
 </head>
 <body>
-<form action="customer-regist.Action" method="post">
+<form action="customer-regist.action" method="post" target="_parent">
     <div id="box">
         <div id="name">
             <span class="word">用户名</span>
