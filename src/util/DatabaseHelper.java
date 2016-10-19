@@ -28,7 +28,7 @@ public class DatabaseHelper {
      *
      * @param sql 要执行的sql语句
      */
-    public static void excuteUpdate(String sql) {
+    public static void executeUpdate(String sql) {
         Connection connection = null;
         try {
             connection = DriverManager.getConnection(URL);

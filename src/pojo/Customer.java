@@ -6,7 +6,6 @@ public class Customer extends User {
     private double balance;
     private String path;
     private List<Document> myDocuments;
-    private List<Store> oftenUsedStores;
     private Store defaultStore;
     private String payPassword;
 
@@ -39,14 +38,6 @@ public class Customer extends User {
 
     public void setMyDocuments(List<Document> myDocuments) {
         this.myDocuments = myDocuments;
-    }
-
-    public List<Store> getOftenUsedStores() {
-        return oftenUsedStores;
-    }
-
-    public void setOftenUsedStores(List<Store> oftenUsedStores) {
-        this.oftenUsedStores = oftenUsedStores;
     }
 
     public Store getDefaultStore() {

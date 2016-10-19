@@ -14,6 +14,12 @@ import java.util.List;
 
 public class OrderDao {
 
+    public void addNewOrder(Order order) {
+        //TODO 在数据库里添加一条订单
+        String sql = "";
+        DatabaseHelper.executeUpdate(sql);
+    }
+
     public List<Order> getCustomerAllOrders() {
         String sql = "select * from `order` where customer_id=" + UserManager.getCurrentUser().getId();
         return getUserOrders(sql);
@@ -33,6 +39,18 @@ public class OrderDao {
     public List<Order> getStoreCompletedOrders() {
         String sql = "select * from `order` where store_id=" + UserManager.getCurrentUser().getId()
                 + "and is_picked_up=1";
+        return getUserOrders(sql);
+    }
+
+    public List<Order> getCustomerOngoingOrders() {
+        String sql = "select * from `order` where customer_id=" + UserManager.getCurrentUser().getId()
+                + "and is_picked_up=0";
+        return getUserOrders(sql);
+    }
+
+    public List<Order> getStoreOngoingOrders() {
+        String sql = "select * from `order` where store_id=" + UserManager.getCurrentUser().getId()
+                + "and is_picked_up=0";
         return getUserOrders(sql);
     }
 
@@ -62,19 +80,15 @@ public class OrderDao {
     }
 
     private Customer findCustomerById(int customerId) {
-        return new CustomerInfoDao().getCustomerInfo(customerId);
+        return new CustomerInfoDao().getCustomerInfoById(customerId);
     }
 
     private Store findStoreById(int storeId) {
-        return new StoreInfoDao().getStoreInfo(storeId);
+        return new StoreInfoDao().getStoreInfoById(storeId);
     }
 
     private List<Document> findOrderAllDocument(int orderId) {
         return new DocumentDao().getOrderAllDocuments(orderId);
-    }
-
-    public void addNewOrder(Order order) {
-
     }
 
 
