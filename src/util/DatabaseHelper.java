@@ -7,7 +7,7 @@ import java.sql.*;
 public class DatabaseHelper {
 
     //根据数据库连接协议定义连接URL
-    private static final String URL = "jdbc:mysql://localhost:3306/javaee?"
+    private static final String URL = "jdbc:mysql://120.27.105.171:3306/javaee?"
             + "user=root&password=password&useUnicode=true&characterEncoding=UTF8";
 
     //在使用java代码访问数据库前，需要将目标数据库的JDBC驱动载入
