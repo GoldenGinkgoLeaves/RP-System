@@ -1,0 +1,62 @@
+@charset "utf-8";
+#login{
+	width: 480px;
+	margin-left: 450px;
+}
+#login #name{
+	width: 100%;
+	height: 30px;
+	margin-top: 60px;
+}
+#login #paw{
+	width: 100%;
+	height: 30px;
+	padding-top: 42px;
+}
+#login span{
+	float: left;
+	width: 70px;
+	height: 30px;
+	line-height: 30px;
+	text-align: right;
+	font-size: 18px;
+	font-weight: 600;
+	color: #777;
+	margin-left: 20px;
+}
+#login input{
+	float: left;
+	height: 30px;
+	width: 258px;
+	font-size: 16px;
+	border: 1px solid #D2D2D2;
+	margin-left: 16px;
+}
+#login input[type="submit"]{
+	width: 262px;
+	height: 33px;
+	color: #fff;
+	font-size: 19px;
+	font-weight: 500;
+	border-radius: 3px;
+	margin-left: 108px;
+	margin-top: 42px;
+	background-color: #0066CC;
+	border-radius: 3px;
+}
+#notice{
+	width: 100%;
+	height: 40px;
+}
+#notice span{
+	margin-top: 10px;
+	width: 100%;
+	height: 40px;
+	text-align: center;
+	color: #777;
+	font-size: 13px;
+}
+#notice span a{
+	text-decoration: none;
+	font-size: 14px;
+}
