@@ -14,40 +14,74 @@ import java.util.List;
 
 public class OrderDao {
 
+    /**
+     * 在数据库里添加一条订单
+     */
     public void addNewOrder(Order order) {
-        //TODO 在数据库里添加一条订单
-        String sql = "insert into `order`(customer_id,store_id,code,price,evaluation,is_picked_up ";
+        String sql = "insert into `order`(customer_id,store_id,code,price,evaluation,is_picked_up) values('" +
+                order.getCustomer().getId() + "','" +
+                order.getStore().getId() + "','" +
+                order.getCode() + "','" +
+                order.getPrice() + "','" +
+                order.getEvaluation() + "','" +
+                order.isPickedUp() + "')";
         DatabaseHelper.executeUpdate(sql);
     }
 
+    /**
+     * 将某未完成订单设置为已完成
+     */
+    public void completeOrderComplete(Order order) {
+        String sql = "update `order` set is_picked_up=1 where id=" + order.getId();
+        DatabaseHelper.executeUpdate(sql);
+    }
+
+    /**
+     * 获取消费者所有的订单
+     */
     public List<Order> getCustomerAllOrders() {
         String sql = "select * from `order` where customer_id=" + UserManager.getCurrentUser().getId();
         return getUserOrders(sql);
     }
 
+    /**
+     * 获取商店所有订单
+     */
     public List<Order> getStoreAllOrders() {
         String sql = "select * from `order` where store_id=" + UserManager.getCurrentUser().getId();
         return getUserOrders(sql);
     }
 
+    /**
+     * 获取消费者已完成订单
+     */
     public List<Order> getCustomerCompletedOrders() {
         String sql = "select * from `order` where customer_id=" + UserManager.getCurrentUser().getId()
                 + "and is_picked_up=1";
         return getUserOrders(sql);
     }
 
+    /**
+     * 获取商店已完成订单
+     */
     public List<Order> getStoreCompletedOrders() {
         String sql = "select * from `order` where store_id=" + UserManager.getCurrentUser().getId()
                 + "and is_picked_up=1";
         return getUserOrders(sql);
     }
 
+    /**
+     * 获取消费者正在进行的订单
+     */
     public List<Order> getCustomerOngoingOrders() {
         String sql = "select * from `order` where customer_id=" + UserManager.getCurrentUser().getId()
                 + "and is_picked_up=0";
         return getUserOrders(sql);
     }
 
+    /**
+     * 获取商店正在进行的订单
+     */
     public List<Order> getStoreOngoingOrders() {
         String sql = "select * from `order` where store_id=" + UserManager.getCurrentUser().getId()
                 + "and is_picked_up=0";
@@ -79,14 +113,23 @@ public class OrderDao {
         return orders;
     }
 
+    /**
+     * 使用其他Dao获取消费者信息
+     */
     private Customer findCustomerById(int customerId) {
         return new CustomerInfoDao().getCustomerInfoById(customerId);
     }
 
+    /**
+     * 使用其他Dao获取商店信息
+     */
     private Store findStoreById(int storeId) {
         return new StoreInfoDao().getStoreInfoById(storeId);
     }
 
+    /**
+     * 使用其他Dao获取订单中所有文件
+     */
     private List<Document> findOrderAllDocument(int orderId) {
         return new DocumentDao().getOrderAllDocuments(orderId);
     }

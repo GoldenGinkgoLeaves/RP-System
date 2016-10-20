@@ -4,8 +4,15 @@ import java.util.List;
 
 public class Order implements Comparable<Order> {
 
+    private int id;
     private Customer customer;
     private Store store;
+    private double price;
+    private String code;
+    private boolean isPickedUp;
+    private String evaluation;
+    //在这个类中删除了打印类型
+    private List<Document> documents;
 
     public void setCode(String code) {
         this.code = code;
@@ -14,13 +21,6 @@ public class Order implements Comparable<Order> {
     public void setPrice(double price) {
         this.price = price;
     }
-
-    private double price;
-    private String code;
-    private boolean isPickedUp;
-    private String evaluation;
-    //在这个类中删除了打印类型
-    private List<Document> documents;
 
     //构造方法，必须需要消费者，商店和文件列表
     public Order(Customer customer, Store store, List<Document> documents) {
@@ -42,6 +42,9 @@ public class Order implements Comparable<Order> {
     }
 
     private void generateCode() {
+        for (int i = 0; i < 6; i++) {
+            code += (int) (Math.random() * 10);
+        }
     }
 
     public Customer getCustomer() {
@@ -88,5 +91,13 @@ public class Order implements Comparable<Order> {
         if (price > o.getPrice()) return 1;
         else if (price == o.getPrice()) return 0;
         else return -1;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

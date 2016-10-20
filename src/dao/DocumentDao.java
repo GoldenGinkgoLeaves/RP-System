@@ -26,15 +26,28 @@ public class DocumentDao {
         return findDocumentsByForeignKey(UserManager.getCurrentUser().getId());
     }
 
+    /**
+     * 添加一条文件记录
+     */
     public void addNewDocument(Document document) {
-        //TODO 添加文件的sql语句
-        String sql = "";
+        String sql = "insert into document(name,pages,format,size,path,customer_id,order_id,copies,print_type) values('" +
+                document.getName() + "','" +
+                document.getPages() + "','" +
+                document.getFormat() + "','" +
+                document.getSize() + "','" +
+                document.getPath() + "','" +
+                document.getCustomer().getId() + "','" +
+                document.getOrderId() + "','" +
+                document.getNumberOfCopies() + "','" +
+                document.getPrintType() + "')";
         DatabaseHelper.executeUpdate(sql);
     }
 
+    /**
+     * 删除一条文件记录
+     */
     public void deleteDocument(Document document) {
-        //TODO 删除文件的sql语句
-        String sql = "";
+        String sql = "delete from document where id=" + document.getId();
         DatabaseHelper.executeUpdate(sql);
     }
 

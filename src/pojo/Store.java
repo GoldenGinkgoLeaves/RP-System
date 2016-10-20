@@ -76,7 +76,7 @@ public class Store extends User {
     /**
      * 对营业时间的一些处理，包括设定营业时间和判断当前时间是否在营业时间内
      */
-    public class BusinessHours {
+    public static class BusinessHours {
         private LocalTime beginTime;
         private LocalTime endTime;
 
