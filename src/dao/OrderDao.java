@@ -139,6 +139,4 @@ public class OrderDao {
     private List<Document> findOrderAllDocument(int orderId) {
         return new DocumentDao().getOrderAllDocuments(orderId);
     }
-
-
 }
