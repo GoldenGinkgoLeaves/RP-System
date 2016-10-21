@@ -14,6 +14,7 @@
     <style type="text/css">
         *{
             margin: 0;
+            font-family: "Microsoft YaHei" ! important;
         }
         #top{
             width: 100%;
@@ -55,7 +56,7 @@
             margin-left: 80px;
         }
         #content #one a{
-            background-color: red;
+            background-color: blue;
         }
         #content a{
             display: block;
@@ -74,7 +75,6 @@
         #content a:hover{
             color: white;
             font-size: 23px;
-            text-decoration: underline;
         }
     </style>
 </head>

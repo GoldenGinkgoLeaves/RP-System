@@ -8,9 +8,9 @@ import pojo.Store;
 import pojo.User;
 
 /**
- * 一个全局的静态类，用以全局判断当前系统的使用者
- * 对账号的管理，包含用户登录和注册等的后台逻辑处理
- */
+        * 一个全局的静态类，用以全局判断当前系统的使用者
+        * 对账号的管理，包含用户登录和注册等的后台逻辑处理
+        */
 public class UserManager {
     public static final int NO_SUCH_ACCOUNT = 0;
     public static final int TYPE_CUSTOMER = 1;
@@ -53,7 +53,7 @@ public class UserManager {
                     Store store = new StoreInfoDao().getStoreInfoByAccount(account);
                     setCurrentUser(store, TYPE_STORE);
                 } else return false;
-            }
+            }else return false;
             return true;
         }
         return false;
@@ -65,11 +65,13 @@ public class UserManager {
      * 建议网页上设置账号，密码，支付密码（或是商店名），其他信息在个人中心设置
      */
     public static boolean registerCustomer(Customer customer) {
-        if (isCustomerRegisterInputValid(customer) && confirmAccountType(customer.getAccount()) == NO_SUCH_ACCOUNT) {
+        if (isCustomerRegisterInputValid(customer) &&
+                confirmAccountType(customer.getAccount()) == NO_SUCH_ACCOUNT) {
             new AccountDao().addNewUserAccount(TYPE_CUSTOMER, customer);
             setCurrentUser(customer, TYPE_CUSTOMER);
             return true;
-        } else return false;
+        }
+        else return false;
     }
 
     /**

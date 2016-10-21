@@ -29,6 +29,7 @@
         }
         *{
             margin: 0;
+            font-family: "Microsoft YaHei" ! important;
         }
         #top .hello{
             float: right;
