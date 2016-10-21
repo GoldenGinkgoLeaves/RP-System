@@ -1,6 +1,5 @@
 package dao;
 
-import pojo.Order;
 import pojo.Store;
 import service.UserManager;
 import util.DatabaseHelper;
@@ -53,33 +52,41 @@ public class StoreInfoDao extends UserInfoDao {
     /**
      * 通过账号查询店家信息，可用于登录时
      */
-    public Store getStoreInfoByAccount(String account) {
-        String sql = "select * from store where account" + account;
-        return fillStoreInfo(sql).get(0);
+    public int getStoreIdByAccount(String account) {
+        String sql = "select id from store where account" + account;
+        int id = 0;
+        ResultSet resultSet = DatabaseHelper.executeQuery(sql);
+        try {
+            if (resultSet != null && resultSet.next()) {
+                id = resultSet.getInt("id");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return id;
     }
 
     /**
      * 用ResultSet构造一个Store对象
+     * public Store(int id, int type, String account, String password,
+     * String introduction, String email, String telephone,
+     * List<Order> completedOrders, String name, double priceBlack,
+     * double priceColor, BusinessHours businessHours, String address,
+     * double profit, List<Order> ongoingOrders)
      */
     private List<Store> fillStoreInfo(String sql) {
         ResultSet resultSet = DatabaseHelper.executeQuery(sql);
         List<Store> stores = new ArrayList<>();
         try {
             while (resultSet != null && resultSet.next()) {
-                Store store = new Store();
-                store.setId(resultSet.getInt("id"));
-                store.setAccount(resultSet.getString("account"));
-                store.setPassword(resultSet.getString("introduction"));
-                store.setEmail(resultSet.getString("email"));
-                store.setTelephone(resultSet.getString("telephone"));
-                store.setName(resultSet.getString("name"));
-                store.setPriceBlack(resultSet.getDouble("black_price"));
-                store.setPriceColor(resultSet.getDouble("color_price"));
                 LocalTime begin = LocalTime.parse(resultSet.getString("begin_time"));
                 LocalTime end = LocalTime.parse(resultSet.getString("end_time"));
-                store.setBusinessHours(new Store.BusinessHours(begin, end));
-                store.setAddress(resultSet.getString("address"));
-                store.setProfit(getProfit());
+                Store store = new Store(resultSet.getInt("id"), UserManager.TYPE_STORE, resultSet.getString("account"),
+                        resultSet.getString("password"), resultSet.getString("introduction"), resultSet.getString("email"),
+                        resultSet.getString("telephone"), new OrderDao().getStoreCompletedOrders(),
+                        resultSet.getString("name"), resultSet.getDouble("black_price"), resultSet.getDouble("color_price"),
+                        new Store.BusinessHours(begin, end), resultSet.getString("address"), getProfit(),
+                        new OrderDao().getStoreOngoingOrders());
                 stores.add(store);
             }
         } catch (SQLException e) {

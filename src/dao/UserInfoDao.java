@@ -1,12 +1,10 @@
 package dao;
 
 import pojo.Order;
-import pojo.Store;
 import pojo.User;
 import service.UserManager;
 import util.DatabaseHelper;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**

@@ -14,6 +14,36 @@ public class Store extends User {
     private double profit;//盈利
     private List<Order> ongoingOrders;//正在进行的订单
 
+    /**
+     * 登录注册时通过简略信息构造
+     */
+    public Store(String account, String password, String name) {
+        super(account, password);
+        this.name = name;
+    }
+
+    /**
+     * 需要从数据库中获取用户信息时的构造，如：登录时获取用户信息，消费者查看商店信息
+     */
+    public Store(int id, int type, String account, String password,
+                 String introduction, String email, String telephone,
+                 List<Order> completedOrders, String name, double priceBlack,
+                 double priceColor, BusinessHours businessHours, String address,
+                 double profit, List<Order> ongoingOrders) {
+        super(id, type, account, password, introduction, email, telephone, completedOrders);
+        this.name = name;
+        this.priceBlack = priceBlack;
+        this.priceColor = priceColor;
+        this.businessHours = businessHours;
+        this.address = address;
+        this.profit = profit;
+        this.ongoingOrders = ongoingOrders;
+    }
+
+    public void updateUserInfo(String password, String introduction, String email, String telephone, String name) {
+        super.updateUserInfo(password, introduction, email, telephone);
+        this.name = name;
+    }
 
     public double getPriceBlack() {
         return priceBlack;
@@ -105,6 +135,14 @@ public class Store extends User {
         boolean inBusinessHours() {
             LocalTime currentTime = LocalTime.now();
             return currentTime.isAfter(beginTime) && currentTime.isBefore(endTime);
+        }
+
+        public LocalTime getBeginTime() {
+            return beginTime;
+        }
+
+        public LocalTime getEndTime() {
+            return endTime;
         }
     }
 }

@@ -7,6 +7,8 @@ import pojo.Order;
 import pojo.Store;
 import pojo.User;
 
+import java.util.Date;
+
 /**
  * 提供用户支付订单、查询余额、收益和充值的方法等
  */
@@ -16,6 +18,13 @@ public class PaymentManager {
      */
     public double getBalance() {
         return ((Customer) (UserManager.getCurrentUser())).getBalance();
+    }
+
+    /**
+     * 获取商家盈利
+     */
+    public double getProfit() {
+        return ((Store) (UserManager.getCurrentUser())).getProfit();
     }
 
     /**
@@ -39,18 +48,35 @@ public class PaymentManager {
             double newBalance = getBalance() - order.getPrice();
             if (newBalance < 0) return false;
             new CustomerInfoDao().setBalance(newBalance);
-            sendOrderToStore(order);
+            new OrderDao().addNewOrder(order);
             return true;
         } else return false;
     }
 
     /**
      * 用于领取文件后确认订单已完成
+     * 只要有一家点击了都将设置订单为已完成
+     * 只有当消费者一定时间（如24小时）不点击已完成，店家才可以点击
+     *
+     * @return true点击成功，false不可点击
      */
-    public void confirmOrderCompleted(Order order) {
-        //TODO 消费者点击已完成，不点击则一定时间后可由店家点击完成
+    public boolean confirmOrderCompleted(Order order) {
+        if (UserManager.getUserType() == UserManager.TYPE_STORE) {
+            long currentTime = new Date().getTime();
+            if (currentTime - order.getCreateTime() < 24 * 60 * 60 * 1000) {
+                return false;
+            }
+        }
         order.pickUp();
         new OrderDao().completeOrder(order);
+        return true;
+    }
+
+    /**
+     * 对订单列表进行刷新
+     */
+    public void refreshOrderList() {
+
     }
 
     /**
@@ -59,9 +85,7 @@ public class PaymentManager {
      * @param order 生成的订单，发往的店家在在order类中
      */
     private void sendOrderToStore(Order order) {
-        new OrderDao().addNewOrder(order);
-        //TODO 当消费者提交一个订单时，店家如何实时获得这个订单。可以考虑店家手动刷新？
+        //TODO 当消费者提交一个订单时，店家如何实时获得这个订单?或者可以考虑店家手动刷新refreshOrderList()？
     }
-
 
 }

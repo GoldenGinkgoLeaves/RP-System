@@ -17,7 +17,6 @@ public class UserManager {
     public static final int TYPE_STORE = 2;
 
     private static User currentUser;
-    public static int userType;
 
     //是否有用户登录
     public static boolean isLogined() {
@@ -31,7 +30,7 @@ public class UserManager {
 
     //获取当前登录用户类型
     public static int getUserType() {
-        return userType;
+        return currentUser.getType();
     }
 
     /**
@@ -45,12 +44,14 @@ public class UserManager {
         if (isLoginInputValid(account, password)) {
             if (confirmAccountType(account) == TYPE_CUSTOMER) {
                 if (isPasswordCorrect(TYPE_CUSTOMER, account, password)) {
-                    Customer customer = new CustomerInfoDao().getCustomerInfoByAccount(account);
+                    Customer customer = new CustomerInfoDao().getCustomerInfoById(
+                            new CustomerInfoDao().getCustomerIdByAccount(account));
                     setCurrentUser(customer, TYPE_CUSTOMER);
                 } else return false;
             } else if (confirmAccountType(account) == TYPE_STORE) {
                 if (isPasswordCorrect(TYPE_STORE, account, password)) {
-                    Store store = new StoreInfoDao().getStoreInfoByAccount(account);
+                    Store store = new StoreInfoDao().getStoreInfoById(
+                            new StoreInfoDao().getStoreIdByAccount(account));
                     setCurrentUser(store, TYPE_STORE);
                 } else return false;
             } else return false;
@@ -64,9 +65,12 @@ public class UserManager {
      * 逻辑为注册成功后自动登录
      * 建议网页上设置账号，密码，支付密码（或是商店名），其他信息在个人中心设置
      */
-    public static boolean registerCustomer(Customer customer) {
-        if (isCustomerRegisterInputValid(customer) && confirmAccountType(customer.getAccount()) == NO_SUCH_ACCOUNT) {
+    public static boolean registerCustomer(String account, String password, String payPassword) {
+        if (isCustomerRegisterInputValid(account, password, payPassword)
+                && confirmAccountType(account) == NO_SUCH_ACCOUNT) {
+            Customer customer = new Customer(account, password, payPassword);
             new AccountDao().addNewUserAccount(TYPE_CUSTOMER, customer);
+            customer.setId(new CustomerInfoDao().getCustomerIdByAccount(account));
             setCurrentUser(customer, TYPE_CUSTOMER);
             return true;
         } else return false;
@@ -77,9 +81,11 @@ public class UserManager {
      * 逻辑为注册成功后自动登录
      * 建议网页上设置账号，密码，商店名，其他信息在个人中心设置
      */
-    public static boolean registerStore(Store store) {
-        if (isStoreRegisterInputValid(store) && confirmAccountType(store.getAccount()) == NO_SUCH_ACCOUNT) {
+    public static boolean registerStore(String account, String password, String name) {
+        if (isStoreRegisterInputValid(account, password, name) && confirmAccountType(account) == NO_SUCH_ACCOUNT) {
+            Store store = new Store(account, password, name);
             new AccountDao().addNewUserAccount(TYPE_STORE, store);
+            store.setId(new StoreInfoDao().getStoreIdByAccount(account));
             setCurrentUser(store, TYPE_STORE);
             return true;
         } else return false;
@@ -90,6 +96,39 @@ public class UserManager {
      */
     public static void logout() {
         setCurrentUser(null, NO_SUCH_ACCOUNT);
+    }
+
+    /**
+     * 修改消费者个人信息时调用
+     */
+    public static void updateCustomerInfo(String password, String introduction, String email,
+                                          String telephone, String payPassword, Store defaultStore) {
+        ((Customer) currentUser).updateUserInfo(password, introduction, email, telephone, payPassword, defaultStore);
+        CustomerInfoDao dao = new CustomerInfoDao();
+        dao.setPassword(password);
+        dao.setIntroduction(introduction);
+        dao.setEmail(email);
+        dao.setTelephone(telephone);
+        dao.setPayPassword(payPassword);
+        dao.setDefaultStore(defaultStore);
+    }
+
+    /**
+     * 修改商店信息时调用
+     */
+    public static void updateStoreInfo(String name, String password, String introduction, String email, String telephone,
+                                       double priceBlack, double priceColor, String address, Store.BusinessHours businessHours) {
+        ((Store) currentUser).updateUserInfo(password, introduction, email, telephone, name);
+        StoreInfoDao dao = new StoreInfoDao();
+        dao.setPassword(password);
+        dao.setIntroduction(introduction);
+        dao.setEmail(email);
+        dao.setTelephone(telephone);
+        dao.setName(name);
+        dao.setPriceBlack(priceBlack);
+        dao.setPriceColor(priceColor);
+        dao.setAddress(address);
+        dao.setBusinessHours(businessHours.getBeginTime(), businessHours.getEndTime());
     }
 
     /**
@@ -117,17 +156,14 @@ public class UserManager {
 
     /**
      * 以下两个方法用于注册时判断用户输入是否合法
-     *
-     * @param customer 为方便操作，传入用户对象
      */
-    private static boolean isCustomerRegisterInputValid(Customer customer) {
-        return customer.getAccount().length() >= 6 && customer.getPassword().length() >= 6
-                && customer.getPayPassword().length() >= 6;
+    private static boolean isCustomerRegisterInputValid(String account, String password, String payPassword) {
+        return account.length() >= 6 && password.length() >= 6 && payPassword.length() >= 6;
     }
 
-    private static boolean isStoreRegisterInputValid(Store store) {
-        return store.getAccount().length() >= 6 && store.getPassword().length() >= 6
-                && store.getName().length() >= 1;
+    private static boolean isStoreRegisterInputValid(String account, String password, String name) {
+        return account.length() >= 6 && password.length() >= 6
+                && name.length() >= 1;
     }
 
     /**
@@ -138,7 +174,7 @@ public class UserManager {
      */
     private static void setCurrentUser(User user, int type) {
         currentUser = user;
-        userType = type;
+        currentUser.setType(type);
     }
 
 }
