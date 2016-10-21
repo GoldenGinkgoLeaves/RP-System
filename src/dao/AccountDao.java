@@ -98,5 +98,3 @@ public class AccountDao {
         return false;
     }
 }
-
-
