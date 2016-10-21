@@ -22,7 +22,7 @@
             box-shadow: 0.01em -0.01em 0.02em #777,-0.01em 0.01em 0.02em #777;
         }
         .order:hover{
-            box-shadow: 0.02em -0.02em 0.03em #00CCFF,-0.02em 0.02em 0.03em #00CCFF;
+            box-shadow: 0.05em -0.05em 0.03em black,-0.05em 0.05em 0.03em black;
         }
         .time{
             width: 97%;
@@ -32,7 +32,6 @@
             padding-left: 3%;
             border-radius: 5px;
             background-color: #CCFFCC;
-
         }
         .time span{
             margin-left: 300px;
