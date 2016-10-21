@@ -79,6 +79,7 @@ public class StoreInfoDao extends UserInfoDao {
                 LocalTime end = LocalTime.parse(resultSet.getString("end_time"));
                 store.setBusinessHours(new Store.BusinessHours(begin, end));
                 store.setAddress(resultSet.getString("address"));
+                store.setProfit(getProfit());
                 stores.add(store);
             }
         } catch (SQLException e) {

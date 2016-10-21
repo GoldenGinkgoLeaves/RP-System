@@ -12,21 +12,24 @@
     <title>left</title>
     <meta charset="utf-8">
     <style type="text/css">
-        *{
+        * {
             margin: 0;
         }
-        #left{
+
+        #left {
             width: 203px;
             height: 576px;
             border-right: 1px solid #777;
             background-color: #3399FF;
             border-radius: 6px;
         }
-        #left p{
+
+        #left p {
             width: 203px;
             height: 80px;
         }
-        #left a{
+
+        #left a {
             display: block;
             width: 203px;
             height: 80px;
@@ -36,13 +39,15 @@
             border-radius: 6px;
             text-decoration: none;
         }
-        a:link{
+
+        a:link {
             font-size: 18px;
             font-weight: 800;
             color: #777;
             text-decoration: none;
         }
-        a:hover{
+
+        a:hover {
             background-color: #33CCFF;
             color: white;
             font-size: 18px;

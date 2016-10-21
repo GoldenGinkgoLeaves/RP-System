@@ -56,7 +56,7 @@ public class CustomerInfoDao extends UserInfoDao {
     }
 
     //设置支付密码
-    public void setPayPassword(double payPassword) {
+    public void setPayPassword(String payPassword) {
         String sql = "update customer set pay_password" + payPassword
                 + "where id='" + UserManager.getCurrentUser().getId() + "'";
     }

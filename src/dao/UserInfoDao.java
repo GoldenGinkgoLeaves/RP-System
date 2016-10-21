@@ -14,13 +14,13 @@ import java.util.List;
  * 是一个抽象类，子类中可以调用这里的方法
  * 在构造这个Dao的时候就已经确定操作的是当前登录用户，当然也包含不针对此用户的操作
  */
-abstract class UserInfoDao {
+public class UserInfoDao {
     private User user;
 
     /**
      * 构造时即获取当前用户
      */
-    UserInfoDao() {
+    public UserInfoDao() {
         user = UserManager.getCurrentUser();
     }
 

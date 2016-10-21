@@ -18,20 +18,21 @@ public class OrderDao {
      * 在数据库里添加一条订单
      */
     public void addNewOrder(Order order) {
-        String sql = "insert into `order`(customer_id,store_id,code,price,evaluation,is_picked_up) values('" +
+        String sql = "insert into `order`(customer_id,store_id,code,price,evaluation,is_picked_up,create_time) values('" +
                 order.getCustomer().getId() + "','" +
                 order.getStore().getId() + "','" +
                 order.getCode() + "','" +
                 order.getPrice() + "','" +
                 order.getEvaluation() + "','" +
-                order.isPickedUp() + "')";
+                order.isPickedUp() + "','" +
+                order.getCreateTime() + "')";
         DatabaseHelper.executeUpdate(sql);
     }
 
     /**
      * 将某未完成订单设置为已完成
      */
-    public void completeOrderComplete(Order order) {
+    public void completeOrder(Order order) {
         String sql = "update `order` set is_picked_up=1 where id=" + order.getId();
         DatabaseHelper.executeUpdate(sql);
     }
@@ -90,6 +91,8 @@ public class OrderDao {
 
     /**
      * 获取当前用户的所有账单
+     * public Order(int id, Customer customer, Store store, double price, String code,
+     * boolean isPickedUp, String evaluation, List<Document> documents, long createTime)
      */
     private List<Order> getUserOrders(String sql) {
         ResultSet resultSet = DatabaseHelper.executeQuery(sql);
@@ -97,13 +100,16 @@ public class OrderDao {
         try {
             if (resultSet != null) {
                 while (resultSet.next()) {
+                    int id = resultSet.getInt("id");
                     Customer customer = findCustomerById(resultSet.getInt("customer"));
                     Store store = findStoreById(resultSet.getInt("store"));
+                    double price = resultSet.getDouble("price");
+                    String code = resultSet.getString("code");
+                    boolean isPickedUp = resultSet.getBoolean("is_picked_up");
+                    String evaluation = resultSet.getString("evaluation");
                     List<Document> documents = findOrderAllDocument(resultSet.getInt("id"));
-                    Order order = new Order(customer, store, documents);
-                    order.setPrice(resultSet.getDouble("price"));
-                    order.setCode(resultSet.getString("code"));
-                    order.setEvaluation(resultSet.getString("evaluation"));
+                    long createTime = resultSet.getLong("create_time");
+                    Order order = new Order(id, customer, store, price, code, isPickedUp, evaluation, documents, createTime);
                     orders.add(order);
                 }
             }

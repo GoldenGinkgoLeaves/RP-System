@@ -1,5 +1,7 @@
 package pojo;
 
+import dao.UserInfoDao;
+
 import java.util.List;
 
 /**
@@ -48,6 +50,7 @@ public abstract class User {
     }
 
     public List<Order> getCompletedOrders() {
+        completedOrders = new UserInfoDao().getCompletedOrders();
         return completedOrders;
     }
 

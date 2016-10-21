@@ -12,12 +12,13 @@
     <title>远程打印系统</title>
     <meta charset="utf-8">
     <style type="text/css">
-        #top{
+        #top {
             width: 100%;
             height: 90px;
             background-color: #69c2ec;
         }
-        #top .welcome{
+
+        #top .welcome {
             float: left;
             height: 90px;
             width: 50%;
@@ -27,10 +28,12 @@
             font-weight: 600;
             font-size: 36px;
         }
-        *{
+
+        * {
             margin: 0;
         }
-        #top .hello{
+
+        #top .hello {
             float: right;
             height: 90px;
             color: white;
