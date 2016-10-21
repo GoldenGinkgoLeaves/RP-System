@@ -53,7 +53,7 @@ public class UserManager {
                     Store store = new StoreInfoDao().getStoreInfoByAccount(account);
                     setCurrentUser(store, TYPE_STORE);
                 } else return false;
-            }
+            } else return false;
             return true;
         }
         return false;
