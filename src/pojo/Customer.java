@@ -1,5 +1,7 @@
 package pojo;
 
+import dao.CustomerInfoDao;
+
 import java.util.List;
 
 public class Customer extends User {
@@ -10,34 +12,45 @@ public class Customer extends User {
     private String payPassword;
 
     /**
-     * 在文件管理页面添加一些待打印文件
+     * 登录注册时通过简略信息构造
      */
-    public void addSomeDocument(List<Document> documents) {
+    public Customer(String account, String password, String payPassword) {
+        super(account, password);
+        this.payPassword = payPassword;
+    }
 
+    /**
+     * 需要从数据库中获取用户信息时的构造，如：登录时获取用户信息，消费者查看商店信息
+     */
+    public Customer(int id, int type, String account, String password,
+                    String introduction, String email, String telephone,
+                    List<Order> completedOrders, double balance, String path,
+                    List<Document> myDocuments, Store defaultStore, String payPassword) {
+        super(id, type, account, password, introduction, email, telephone, completedOrders);
+        this.balance = balance;
+        this.path = path;
+        this.myDocuments = myDocuments;
+        this.defaultStore = defaultStore;
+        this.payPassword = payPassword;
+    }
+
+    public void updateUserInfo(String password, String introduction, String email, String telephone,
+                               String payPassword, Store defaultStore) {
+        super.updateUserInfo(password, introduction, email, telephone);
+        this.payPassword = payPassword;
+        this.defaultStore = defaultStore;
     }
 
     public double getBalance() {
         return balance;
     }
 
-    public void setBalance(double balance) {
-        this.balance = balance;
-    }
-
     public String getPath() {
         return path;
     }
 
-    public void setPath(String path) {
-        this.path = path;
-    }
-
     public List<Document> getMyDocuments() {
         return myDocuments;
-    }
-
-    public void setMyDocuments(List<Document> myDocuments) {
-        this.myDocuments = myDocuments;
     }
 
     public Store getDefaultStore() {
@@ -46,13 +59,11 @@ public class Customer extends User {
 
     public void setDefaultStore(Store defaultStore) {
         this.defaultStore = defaultStore;
+        new CustomerInfoDao().setDefaultStore(defaultStore);
     }
 
     public String getPayPassword() {
         return payPassword;
     }
 
-    public void setPayPassword(String payPassword) {
-        this.payPassword = payPassword;
-    }
 }

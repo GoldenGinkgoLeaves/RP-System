@@ -26,6 +26,7 @@ public class Document {
      */
     private int printType = PRINT_BLACK;
     private int numberOfCopies = 0;
+    private int orderId = 0;//订单id等于0说明此文件没有加入任何一个订单
 
     public String getName() {
         return name;
@@ -98,5 +99,13 @@ public class Document {
 
     public void setSize(double size) {
         this.size = size;
+    }
+
+    public int getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(int orderId) {
+        this.orderId = orderId;
     }
 }

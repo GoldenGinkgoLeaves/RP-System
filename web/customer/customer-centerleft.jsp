@@ -12,22 +12,25 @@
     <title>left</title>
     <meta charset="utf-8">
     <style type="text/css">
-        *{
+        * {
             margin: 0;
             font-family: "Microsoft YaHei" ! important;
         }
-        #left{
+
+        #left {
             width: 203px;
             height: 552px;
             border-right: 1px solid #777;
             background-color: #999999;
             border-radius: 6px;
         }
-        #left p{
+
+        #left p {
             width: 203px;
             height: 80px;
         }
-        #left a{
+
+        #left a {
             display: block;
             width: 203px;
             height: 80px;
@@ -38,13 +41,15 @@
             color: white;
             text-decoration: none;
         }
-        a:link{
+
+        a:link {
             font-size: 18px;
             font-weight: 800;
 
             text-decoration: none;
         }
-        a:hover{
+
+        a:hover {
             background-color: #33CCFF;
             color: white;
             font-size: 18px;
