@@ -6,11 +6,13 @@
 
 <struts>
     <package name="a" extends="struts-default" namespace="/">
-        <action name="customer-regist" class="action.RegistAction" method="customerResist">
-            <result name="accountnull">/regist/accountnull.jsp</result>
-            <result name="nosame">/regist/unsamepassword.jsp</result>
-            <result name="exit">/regist/accountexit.jsp</result>
+        <action name="customer-regist" class="action.RegisterAction" method="registerCustomer">
+            <result name="no">/regist/accountexit.jsp</result>
             <result name="yes">/customer/customer-center.jsp</result>
+        </action>
+        <action name="login" class="action.LoginAction" method="login">
+            <result name="y">/customer/customer-center.jsp</result>
+            <result name="n">/login/loginerror.jsp</result>
         </action>
     </package>
 </struts>

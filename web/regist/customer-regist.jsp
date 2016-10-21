@@ -18,21 +18,22 @@
     <div id="box">
         <div id="name">
             <span class="word">用户名</span>
-            <input type="text" name="customer.account">
+            <input type="text" name="customer.account" placeholder="请输入用户名">
+            <span class="notice">请设置6位以上用户名</span>
         </div>
         <div id="paw">
             <span class="word">密码</span>
-            <input type="password" name="customer.password">
+            <input type="password" name="customer.password" placeholder="请输入密码">
             <span class="notice">请设置6位以上密码</span>
         </div>
         <div id="paw1">
             <span class="word">确认密码</span>
-            <input type="password" name="password1">
+            <input type="password" name="password1" placeholder="请确认密码">
         </div>
         <div id="tel">
-            <span class="word">手机</span>
-            <input type="text" name="customer.telephone">
-            <span class="notice">请输入有效的号码</span>
+            <span class="word">支付密码</span>
+            <input type="password" name="customer.payPassword" placeholder="请输入支付密码">
+            <span class="notice">请设置6位以上支付密码</span>
         </div>
         <input type="submit" value="注册">
     </div>

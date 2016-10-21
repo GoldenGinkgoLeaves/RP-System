@@ -14,13 +14,14 @@
     <style type="text/css">
         * {
             margin: 0;
+            font-family: "Microsoft YaHei" ! important;
         }
 
         #left {
             width: 203px;
-            height: 576px;
+            height: 552px;
             border-right: 1px solid #777;
-            background-color: #3399FF;
+            background-color: #999999;
             border-radius: 6px;
         }
 
@@ -37,13 +38,14 @@
             text-align: center;
             border-bottom: 2px solid #777;
             border-radius: 6px;
+            color: white;
             text-decoration: none;
         }
 
         a:link {
             font-size: 18px;
             font-weight: 800;
-            color: #777;
+
             text-decoration: none;
         }
 
@@ -51,16 +53,15 @@
             background-color: #33CCFF;
             color: white;
             font-size: 18px;
-            text-decoration: underline;
         }
     </style>
 </head>
 <body>
 <div id="left">
     <p><a href="customer-document.jsp" target="main">我的文件</a></p>
-    <p><a href="stu-center-doc.html" target="main">常用店家</a></p>
-    <p><a href="stu-center-doc.html" target="main">我的订单</a></p>
-    <p><a href="stu-center-doc.html" target="main">个人信息</a></p>
+    <p><a href="stores.jsp" target="main">常用店家</a></p>
+    <p><a href="myorder.jsp" target="main">我的订单</a></p>
+    <p><a href="customer-info.jsp" target="main">个人信息</a></p>
 </div>
 </body>
 </html>

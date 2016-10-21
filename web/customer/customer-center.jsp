@@ -13,10 +13,10 @@
     <meta charset="utf-8">
 </head>
 <frameset rows="90,*" border="none">
-    <frame src="customer-center-head.html" name="top">
+    <frame src="/customer/customer-centerhead.jsp" name="top">
     <frameset cols="15%,*">
-        <frame src="customer-center-left.html" name="left">
-        <frame src="customer_doc.html" name="main">
+        <frame src="/customer/customer-centerleft.jsp" name="left">
+        <frame src="/customer/customer-document.jsp" name="main">
     </frameset>
 </frameset>
 </html>

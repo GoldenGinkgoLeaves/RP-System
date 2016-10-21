@@ -6,11 +6,15 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<!DOCTYPE html>
 <html>
 <head>
     <title></title>
     <meta charset="utf-8">
     <style type="text/css">
+        *{
+            font-family: "Microsoft YaHei" ! important;
+        }
         #head{
             margin: 0;
             width: 100%;
@@ -62,9 +66,8 @@
             margin-top: 30px;
             padding: 0 20px;
         }
-        a:active{
-            color: blue;
-            border-bottom: 2px solid blue;
+        .visited{
+            border-bottom: 2px solid rgb(154, 153, 153);
         }
         hr{
             clear: both;
@@ -82,8 +85,25 @@
     <p>远程打印系统</p>
     <div class="img"></div>
 </div>
-<a class="custom" href="customer-regist.jsp" target="main">用户注册</a>
-<a class="store" href="store-regist.jsp" target="main">商家注册</a>
-<hr>
+<a class="custom visited" id="custom" href="customer-regist.jsp" target="main">用户注册</a>
+<a class="store" id="store" href="store-regist.jsp" target="main">商家注册</a>
+
+<script type="text/javascript">
+
+    window.onload=function(){
+        var custom=document.getElementById("custom");
+        var store=document.getElementById("store");
+
+        store.onclick=function(){
+            custom.classList.remove("visited");
+            store.classList.add("visited");
+        }
+
+        custom.onclick=function(){
+            store.classList.remove("visited");
+            custom.classList.add("visited");
+        }
+    }
+</script>
 </body>
 </html>
