@@ -13,6 +13,8 @@ public class DocumentHandler {
     }
 
     public DocumentHandler() {
+
+        System.out.println();
     }
 
     public void setUser(User user) {
