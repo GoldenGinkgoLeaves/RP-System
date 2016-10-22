@@ -5,12 +5,12 @@
         "http://struts.apache.org/dtds/struts-2.3.dtd">
 
 <struts>
-    <package name="a" extends="struts-default" namespace="/">
-        <action name="customer-regist" class="action.RegistAction" method="customerResist">
-            <result name="accountnull">/regist/accountnull.jsp</result>
-            <result name="nosame">/regist/unsamepassword.jsp</result>
-            <result name="exit">/regist/accountexit.jsp</result>
-            <result name="yes">/customer/customer-center.jsp</result>
-        </action>
-    </package>
+    <!--<package name="a" extends="struts-default" namespace="/">-->
+        <!--<action name="customer-regist" class="action.RegistAction" method="customerResist">-->
+            <!--<result name="accountnull">/regist/accountnull.jsp</result>-->
+            <!--<result name="nosame">/regist/unsamepassword.jsp</result>-->
+            <!--<result name="exit">/regist/accountexit.jsp</result>-->
+            <!--<result name="yes">/customer/customer-center.jsp</result>-->
+        <!--</action>-->
+    <!--</package>-->
 </struts>
